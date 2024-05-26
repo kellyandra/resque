@@ -30,12 +30,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_blue: ^0.8.0  # Use the latest version or the version suitable for your needs.
-
+  permission_handler: ^10.2.0
+  flutter_svg: ^0.22.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
+  #nordic_nrf_mesh: ^0.13.0
 
 dev_dependencies:
   flutter_test:
@@ -56,6 +57,7 @@ flutter:
 
   assets:
     - assets/splash.png
+    - assets/Rectangle10.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
