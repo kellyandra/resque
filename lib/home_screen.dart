@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:resque/alert_screen.dart';
 import 'package:resque/chat_screen.dart';
 import 'package:resque/main.dart';
+import 'package:resque/screens/devicesearchscreen.dart';
 
 void main() {
   runApp(const MyApp());
