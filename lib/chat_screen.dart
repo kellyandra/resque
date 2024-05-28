@@ -1,4 +1,9 @@
+import 'package:all_bluetooth/all_bluetooth.dart';
 import 'package:flutter/material.dart';
+import 'screens/messagingscreen.dart';
+import 'package:flutter_chat_bubble/chat_bubble.dart';
+import 'package:flutter_chat_bubble/bubble_type.dart';
+import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_4.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,6 +23,30 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  final messageController= TextEditingController();
+
+  final messages = <Message>[];
+
+@override
+  void initState() {
+  
+    super.initState();
+    AllBluetooth.listenForData.listen((event) {
+      messages.add(Message(
+        message: event.toString(),
+        isMe: false,
+      ));
+       setState(() {});
+    });
+  }
+
+  @override
+  void dispose(){
+    super.dispose();
+    messageController.dispose();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +58,64 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(icon: Icon(Icons.add), onPressed: () {}),
         ],
       ),
-      body: Container(
+       body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: messages.length,
+              itemBuilder: (context, index) {
+                final message = messages[index];
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ChatBubble(
+                    clipper: ChatBubbleClipper4(type: message.isMe ? BubbleType.sendBubble : BubbleType.receiverBubble),
+                    alignment: message.isMe ? Alignment.topRight : Alignment.topLeft,
+                    child: Text(message.message),
+                  ),
+                );
+              },
+            ),
+          ),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: messageController,
+                  decoration: const InputDecoration(
+                    enabledBorder: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              IconButton(
+                onPressed: () {
+                  final messageText = messageController.text;
+                  AllBluetooth.sendMessage(messageText);
+                  messageController.clear();
+                  messages.add(
+                    Message(
+                      message: messageText,
+                      isMe: true,
+                    ),
+                  );
+                  setState(() {});
+                },
+                icon: const Icon(Icons.send),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Message {
+  final String message;
+  final bool isMe;
+
+  Message({required this.message, required this.isMe});
+}
+    /*  body: Container(
         padding: EdgeInsets.symmetric(horizontal: 10),
         decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -51,7 +137,7 @@ class _ChatScreenState extends State<ChatScreen> {
             );
           },
         ),
-      ),
-    );
-  }
-}
+      ),*/
+
+
+

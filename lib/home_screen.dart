@@ -41,7 +41,7 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
         actions: <Widget>[
           IconButton(onPressed: () {
             Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => DeviceScreen()),
+            MaterialPageRoute(builder: (context) => DeviceScreen(device: device)),
             );
           }, 
           icon: Image.asset('assets/Rectangle10.png'))
