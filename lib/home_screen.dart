@@ -4,6 +4,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:resque/alert_screen.dart';
 import 'package:resque/chat_screen.dart';
 import 'package:resque/main.dart';
+import 'package:resque/screens/devicesearchscreen.dart';
 import 'package:resque/services/secure_storage_manager.dart';
 
 
