@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
+import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
 import 'package:resque/alert_screen.dart';
 import 'package:resque/home_screen.dart';
 import 'package:resque/splash_page.dart';
@@ -51,20 +52,5 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return SplashPage(); // Display the SplashPage widget
-  }
-}
-
-// ignore: use_key_in_widget_constructors
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home Page'),
-        ),
-        body: const Center(
-          child:  Text('Welcome to the App!')
-          ),
-    );
   }
 }
