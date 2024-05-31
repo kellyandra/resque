@@ -7,7 +7,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bluetooth App',
+      title: 'Resque App',
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),  // Set HomeScreen as the starting point
     );
