@@ -1,12 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:resque/alert_screen.dart';
 import 'package:resque/chat_screen.dart';
 import 'package:resque/main.dart';
 import 'package:resque/screens/devicesearchscreen.dart';
-import 'package:resque/services/secure_storage_manager.dart';
 
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: HomeScreenWidget(),
+    );
+  }
+}
 
 class HomeScreenWidget extends StatefulWidget {
   const HomeScreenWidget({super.key});
@@ -16,52 +27,6 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class HomeScreenWidgetState extends State<HomeScreenWidget> {
-  final NordicNrfMesh _nordicNrfMesh = NordicNrfMesh();
-  MeshManagerApi? _meshManagerApi;
-
-  final String defaultNetworkJson = '{"networkKey": ""}';
-
-  
-  @override
-  void initState() {
-    super.initState();
-    _checkPermissions().then((granted) {
-      if (granted) {
-        initMeshNetwork();
-      } else {
-        print("Bluetooth permissions not granted.");
-      }
-    });
-    
-  }
-
-  Future<void> initMeshNetwork() async {
-    try {
-      final String? networkKey = await SecureStorageManager.getNetworkKey("mesh_network_config");
-      if (networkKey == null) {
-        await SecureStorageManager.setupDefaultConfig();
-        // Retrieve the new default network key
-        final String? newNetworkKey = await SecureStorageManager.getNetworkKey("mesh_network_config");
-        // Initialize the mesh network with the new default key
-        await _meshManagerApi?.importMeshNetworkJson(newNetworkKey ?? "{}");
-        print("Default network configuration created and used for initialization.");
-    } else {
-      // Initialize the mesh network with the existing key
-      await _meshManagerApi?.importMeshNetworkJson(networkKey);
-      print("Mesh network initialized with existing configuration.");
-      }
-      
-    } catch (e) {
-      print("Error initializing network: $e");
-    }
-    
-  }
-
-  Future<bool> _checkPermissions() async {
-    final status = await Permission.bluetooth.request();
-    return status.isGranted;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,12 +41,14 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
         actions: <Widget>[
           IconButton(onPressed: () {
             Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => DeviceScreen(device: device)),
+            MaterialPageRoute(builder: (context) => HomeScreen()),
             );
           }, 
+          
           icon: Image.asset('assets/Rectangle10.png'))
         ],
       ),
+      
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -105,6 +72,7 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
       ),
     );
   }
+  
 
   Widget _buildAlertSection() {
     return Container(
@@ -147,6 +115,8 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
         _buildButton('Alert History', Icons.notifications, Colors.red, AlertHistoryScreen()),
         const SizedBox(height: 10),
         _buildButton('Chat', Icons.chat, Colors.blue, ChatScreen()),
+         const SizedBox(height: 10),
+         _buildButton('Connect Devices', Icons.bluetooth_searching, Colors.green, HomeScreen()),
       ],
     );
   }
