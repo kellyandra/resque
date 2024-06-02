@@ -19,19 +19,44 @@ class MyApp extends StatelessWidget {
 
 class ChatScreen extends StatefulWidget {
   @override
-  ChatScreenState createState() => ChatScreenState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
-class ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends State<ChatScreen> {
+  final messageController = TextEditingController();
+  final messages = <Message>[];
+  late AllBluetooth bluetooth;  // Declare bluetooth instance
+
+  @override
+  void initState() {
+    super.initState();
+    bluetooth = AllBluetooth();  // Initialize bluetooth
+    bluetooth.listenForData.listen((event) {  // Listen on instance
+      messages.add(Message(
+        message: event.toString(),
+        isMe: false,
+      ));
+      setState(() {});
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    messageController.dispose();
+  
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: const Text('CHATS'),
+        title: Text('CHATS'),
         actions: [
-          IconButton(icon: const Icon(Icons.refresh), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.add), onPressed: () {}),
+          IconButton(icon: Icon(Icons.refresh), onPressed: () {}),
+          IconButton(icon: Icon(Icons.add), onPressed: () {}),
         ],
       ),
        body: Column(
@@ -103,7 +128,7 @@ class Message {
         child: ListView.builder(
           itemCount: 5, // number of chat items
           itemBuilder: (context, index) {
-            return const ListTile(
+            return ListTile(
               leading: CircleAvatar(
                 // backgroundImage: AssetImage('path_to_image'), // path to your image
               ),
@@ -114,6 +139,3 @@ class Message {
           },
         ),
       ),*/
-
-
-
