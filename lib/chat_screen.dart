@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -14,24 +16,24 @@ class MyApp extends StatelessWidget {
 
 class ChatScreen extends StatefulWidget {
   @override
-  _ChatScreenState createState() => _ChatScreenState();
+  ChatScreenState createState() => ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class ChatScreenState extends State<ChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        title: Text('CHATS'),
+        title: const Text('CHATS'),
         actions: [
-          IconButton(icon: Icon(Icons.refresh), onPressed: () {}),
-          IconButton(icon: Icon(Icons.add), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.refresh), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.add), onPressed: () {}),
         ],
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(horizontal: 10),
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: [Color.fromRGBO(140, 139, 197, 1), Color.fromRGBO(31, 27, 193, 1)],
             begin: Alignment.topCenter,
@@ -41,7 +43,7 @@ class _ChatScreenState extends State<ChatScreen> {
         child: ListView.builder(
           itemCount: 5, // number of chat items
           itemBuilder: (context, index) {
-            return ListTile(
+            return const ListTile(
               leading: CircleAvatar(
                 // backgroundImage: AssetImage('path_to_image'), // path to your image
               ),
