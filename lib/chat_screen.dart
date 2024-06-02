@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 
 class ChatScreen extends StatefulWidget {
   @override
-  ChatScreenState createState() => ChatScreenState();
+  _ChatScreenState createState() => _ChatScreenState();
 }
 
 class _ChatScreenState extends State<ChatScreen> {
