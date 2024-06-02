@@ -23,27 +23,28 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  final messageController= TextEditingController();
-
+  final messageController = TextEditingController();
   final messages = <Message>[];
+  late AllBluetooth bluetooth;  // Declare bluetooth instance
 
-@override
+  @override
   void initState() {
-  
     super.initState();
-    AllBluetooth.listenForData.listen((event) {
+    bluetooth = AllBluetooth();  // Initialize bluetooth
+    bluetooth.listenForData.listen((event) {  // Listen on instance
       messages.add(Message(
         message: event.toString(),
         isMe: false,
       ));
-       setState(() {});
+      setState(() {});
     });
   }
 
   @override
-  void dispose(){
+  void dispose() {
     super.dispose();
     messageController.dispose();
+  
   }
 
 
@@ -89,7 +90,7 @@ class _ChatScreenState extends State<ChatScreen> {
               IconButton(
                 onPressed: () {
                   final messageText = messageController.text;
-                  AllBluetooth.sendMessage(messageText);
+                  bluetooth.sendMessage(messageText); 
                   messageController.clear();
                   messages.add(
                     Message(

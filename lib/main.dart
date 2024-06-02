@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'package:flutter/material.dart';
-import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
+//import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
 import 'package:resque/alert_screen.dart';
 import 'package:resque/home_screen.dart';
 import 'package:resque/splash_page.dart';
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'BT Messaging App',
+      title: 'Resque',
       theme: ThemeData(
         primarySwatch: Colors.blue,
         useMaterial3: true,
