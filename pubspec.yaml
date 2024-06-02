@@ -63,6 +63,7 @@ flutter:
   assets:
     - assets/splash.png
     - assets/Rectangle10.png
+    - assets/rqlogo.png
 
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
