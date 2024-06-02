@@ -48,18 +48,26 @@ class _ChatScreenState extends State<ChatScreen> {
   }
 
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.deepPurple,
-        title: Text('CHATS'),
-        actions: [
-          IconButton(icon: Icon(Icons.refresh), onPressed: () {}),
-          IconButton(icon: Icon(Icons.add), onPressed: () {}),
-        ],
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      backgroundColor: Color.fromARGB(255, 0, 140, 255),
+      title: Text('CHATS'),
+      actions: [
+        IconButton(icon: Icon(Icons.refresh), onPressed: () {}),
+        IconButton(icon: Icon(Icons.add), onPressed: () {}),
+      ],
+    ),
+    body: Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color.fromRGBO(232, 232, 232, 1), Color.fromRGBO(145, 207, 255, 1)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
-       body: Column(
+      child: Column(
         children: [
           Expanded(
             child: ListView.builder(
@@ -77,37 +85,42 @@ class _ChatScreenState extends State<ChatScreen> {
               },
             ),
           ),
-          Row(
-            children: [
-              Expanded(
-                child: TextField(
-                  controller: messageController,
-                  decoration: const InputDecoration(
-                    enabledBorder: OutlineInputBorder(),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0, bottom: 20.0),  // Adds padding on the left and bottom
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: messageController,
+                    decoration: const InputDecoration(
+                      enabledBorder: OutlineInputBorder(),
+                    ),
                   ),
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  final messageText = messageController.text;
-                  bluetooth.sendMessage(messageText); 
-                  messageController.clear();
-                  messages.add(
-                    Message(
-                      message: messageText,
-                      isMe: true,
-                    ),
-                  );
-                  setState(() {});
-                },
-                icon: const Icon(Icons.send),
-              )
-            ],
+                IconButton(
+                  onPressed: () {
+                    final messageText = messageController.text;
+                    bluetooth.sendMessage(messageText); 
+                    messageController.clear();
+                    messages.add(
+                      Message(
+                        message: messageText,
+                        isMe: true,
+                      ),
+                    );
+                    setState(() {});
+                  },
+                  icon: const Icon(Icons.send),
+                )
+              ],
+            ),
           ),
         ],
       ),
-    );
-  }
+    ),
+  );
+}
+
 }
 
 class Message {

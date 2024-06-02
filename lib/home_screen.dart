@@ -54,7 +54,7 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [Colors.purple, Color.fromARGB(255, 182, 117, 33)],
+            colors: [Colors.purple, Color.fromARGB(255, 249, 236, 220)],
           ),
         ),
         child: Column(
@@ -122,18 +122,24 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
   }
 
   Widget _buildButton(String title, IconData icon, Color color, Widget page) {
-    return ElevatedButton.icon(
-      onPressed: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context) => page),
-        );
-      },
-      icon: Icon(icon, color: Colors.white),
-      label: Text(title),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: color,
-        foregroundColor: Colors.white,
-        minimumSize: const Size(double.infinity, 50), // Ensuring the button takes full width
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+      Flexible(
+        child: ElevatedButton.icon(
+          onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+          },
+          icon: Icon(icon, color: Colors.white),
+          label: Text(title),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: color,
+            foregroundColor: Colors.white,
+            minimumSize: Size(350, 50), // Manage width within Flexible constraints
+          ),
+        ),
       ),
-    );
-  }
+    ],
+  );
+}
 }
