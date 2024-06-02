@@ -30,12 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
- # nordic_nrf_mesh: ^0.13.0  # Use the latest version or the version suitable for your needs.
   permission_handler: ^10.2.0
   flutter_svg: ^0.22.0
   flutter_secure_storage: ^9.2.2
   all_bluetooth: ^0.1.0  
-  device_info: ^2.0.2
+  device_info_plus: ^10.1.0
   flutter_styled_toast: ^2.2.1
   flutter_chat_bubble: ^2.0.2
 

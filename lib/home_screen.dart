@@ -1,32 +1,36 @@
+// ignore_for_file: unused_import
+import 'dart:async';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:resque/alert_screen.dart';
-import 'package:resque/chat_screen.dart';
-import 'package:resque/main.dart';
-import 'package:resque/screens/devicesearchscreen.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'alert_screen.dart';
+import 'chat_screen.dart';
+import 'screens/devicesearchscreen.dart';
+import 'services/secure_storage_manager.dart';
 
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      home: HomeScreenWidget(),
-    );
-  }
-}
 
 class HomeScreenWidget extends StatefulWidget {
+
+
   const HomeScreenWidget({super.key});
 
   @override
-  HomeScreenWidgetState createState() => HomeScreenWidgetState();
+  State<HomeScreenWidget> createState() => _HomeScreenWidgetState();
 }
 
-class HomeScreenWidgetState extends State<HomeScreenWidget> {
+class _HomeScreenWidgetState extends State<HomeScreenWidget> {
+  
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  // Future<bool> _checkPermissions() async {
+  //   final status = await Permission.bluetooth.request();
+  //   return status.isGranted;
+  // }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -97,8 +101,8 @@ class HomeScreenWidgetState extends State<HomeScreenWidget> {
           ),
           TextButton(
             onPressed: () {},
-            child: const Text('See details'),
             style: TextButton.styleFrom(foregroundColor: Colors.blueAccent),
+            child: const Text('See details'),
           ),
           const Text(
             '3:30pm',

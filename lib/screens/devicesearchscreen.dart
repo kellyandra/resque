@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 import 'package:all_bluetooth/all_bluetooth.dart';
 
@@ -15,10 +17,10 @@ class MyApp extends StatelessWidget {
 }
 class HomeScreen extends StatefulWidget {
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  HomeScreenState createState() => HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class HomeScreenState extends State<HomeScreen> {
   List<BluetoothDevice> devices = [];  // List to store discovered devices
 
   @override
@@ -37,15 +39,15 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Find Devices')),
+      appBar: AppBar(title: const Text('Find Devices')),
       body: devices.isEmpty
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               itemCount: devices.length,
               itemBuilder: (context, index) {
                 final device = devices[index];
                 return ListTile(
-                  title: Text(device.name ?? "Unknown Device"),
+                  title: Text(device.name),
                   subtitle: Text(device.address),
                   onTap: () => Navigator.of(context).push(
                     MaterialPageRoute(
@@ -57,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => allBluetooth.startDiscovery(),
-        child: Icon(Icons.search),
+        child: const Icon(Icons.search),
       ),
     );
   }
@@ -65,20 +67,20 @@ class _HomeScreenState extends State<HomeScreen> {
 class DeviceScreen extends StatelessWidget {
   final BluetoothDevice device;
 
-  DeviceScreen({required this.device});
+  const DeviceScreen({required this.device});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(device.name ?? "Unknown Device"),
+        title: Text(device.name),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              child: Text('Connect'),
+              child: const Text('Connect'),
               onPressed: () async {
                 await allBluetooth.connectToDevice(device.address);
               },

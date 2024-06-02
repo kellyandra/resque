@@ -1,10 +1,9 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_import
 
 import 'package:flutter/material.dart';
-//import 'package:nordic_nrf_mesh/nordic_nrf_mesh.dart';
-import 'package:resque/alert_screen.dart';
-import 'package:resque/home_screen.dart';
-import 'package:resque/splash_page.dart';
+import 'alert_screen.dart';
+import 'home_screen.dart';
+import 'splash_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
@@ -43,7 +42,7 @@ class SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 3), () {
       Navigator.pushReplacement(context, 
       MaterialPageRoute(
-        builder: (context) => HomeScreenWidget(),
+        builder: (context) => const HomeScreenWidget(),
         ),
       );
     });
