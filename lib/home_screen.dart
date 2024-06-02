@@ -48,9 +48,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
             MaterialPageRoute(builder: (context) => HomeScreen()),
             );
           }, 
+          
           icon: Image.asset('assets/Rectangle10.png'))
         ],
       ),
+      
       body: Container(
         decoration: const BoxDecoration(
           gradient: LinearGradient(
@@ -74,6 +76,7 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       ),
     );
   }
+  
 
   Widget _buildAlertSection() {
     return Container(
@@ -116,6 +119,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         _buildButton('Alert History', Icons.notifications, Colors.red, AlertHistoryScreen()),
         const SizedBox(height: 10),
         _buildButton('Chat', Icons.chat, Colors.blue, ChatScreen()),
+         const SizedBox(height: 10),
+         _buildButton('Connect Devices', Icons.bluetooth_searching, Colors.green, HomeScreen()),
       ],
     );
   }
