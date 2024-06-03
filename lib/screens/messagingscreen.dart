@@ -105,3 +105,6 @@ class _MessageScreenState extends State<MessageScreen> {
         ));
   }
 }
+
+
+// credit to https://www.youtube.com/watch?v=2gVYSIbvAUE&t=600s for messaging screen and bonded devices screen

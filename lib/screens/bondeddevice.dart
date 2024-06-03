@@ -134,3 +134,5 @@ class _BondScreenState extends State<BondScreen> {
         });
   }
 }
+
+// credit to https://www.youtube.com/watch?v=2gVYSIbvAUE&t=600s for messaging screen and bonded devices screen
