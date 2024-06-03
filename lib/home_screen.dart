@@ -1,4 +1,3 @@
-// ignore_for_file: unused_import
 import 'dart:async';
 import 'dart:io';
 
@@ -10,10 +9,7 @@ import 'chat_screen.dart';
 import 'screens/devicesearchscreen.dart';
 import 'services/secure_storage_manager.dart';
 
-
 class HomeScreenWidget extends StatefulWidget {
-
-
   const HomeScreenWidget({super.key});
 
   @override
@@ -21,17 +17,13 @@ class HomeScreenWidget extends StatefulWidget {
 }
 
 class _HomeScreenWidgetState extends State<HomeScreenWidget> {
-  
+  // Initialize state
   @override
   void initState() {
     super.initState();
   }
 
-  // Future<bool> _checkPermissions() async {
-  //   final status = await Permission.bluetooth.request();
-  //   return status.isGranted;
-  // }
-
+  // Widget build method: sets up the UI structure
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,13 +36,14 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
           onPressed: () {},
         ),
         actions: <Widget>[
-          IconButton(onPressed: () {
-            Navigator.push(context, 
-            MaterialPageRoute(builder: (context) => HomeScreen()),
-            );
-          }, 
-          
-          icon: Image.asset('assets/Rectangle10.png'))
+          IconButton(
+            onPressed: () {
+              Navigator.push(context, 
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+              );
+            }, 
+            icon: Image.asset('assets/Rectangle10.png')
+          )
         ],
       ),
       
@@ -65,11 +58,11 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
         child: Column(
           children: <Widget>[
             Expanded(
-              flex: 2, // Adjust flex to change the space taken by the alert section
+              flex: 2, // Section for emergency alerts
               child: _buildAlertSection(),
             ),
             Expanded(
-              flex: 1, // Adjust flex to change the space taken by the buttons
+              flex: 1, // Section for buttons that navigate to other screens
               child: _buildButtonSection(),
             ),
           ],
@@ -77,8 +70,8 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       ),
     );
   }
-  
 
+  // Builds the alert section with notification information
   Widget _buildAlertSection() {
     return Container(
       padding: const EdgeInsets.all(20),
@@ -114,37 +107,39 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
     );
   }
 
+  // Builds the section containing navigation buttons
   Widget _buildButtonSection() {
     return Column(
       children: [
         _buildButton('Alert History', Icons.notifications, Colors.red, AlertHistoryScreen()),
         const SizedBox(height: 10),
         _buildButton('Chat', Icons.chat, Colors.blue, ChatsScreen()),
-         const SizedBox(height: 10),
-         _buildButton('Connect Devices', Icons.bluetooth_searching, Colors.green, BondScreen()),
+        const SizedBox(height: 10),
+        _buildButton('Connect Devices', Icons.bluetooth_searching, Colors.green, BondScreen()),
       ],
     );
   }
 
+  // Helper function to build a styled button
   Widget _buildButton(String title, IconData icon, Color color, Widget page) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.center,
-    children: [
-      Flexible(
-        child: ElevatedButton.icon(
-          onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => page));
-          },
-          icon: Icon(icon, color: Colors.white),
-          label: Text(title),
-          style: ElevatedButton.styleFrom(
-            backgroundColor: color,
-            foregroundColor: Colors.white,
-            minimumSize: Size(350, 50), // Manage width within Flexible constraints
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+          child: ElevatedButton.icon(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => page));
+            },
+            icon: Icon(icon, color: Colors.white),
+            label: Text(title),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: color,
+              foregroundColor: Colors.white,
+              minimumSize: Size(350, 50),
+            ),
           ),
         ),
-      ),
-    ],
-  );
-}
+      ],
+    );
+  }
 }

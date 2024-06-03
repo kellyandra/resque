@@ -5,6 +5,7 @@ import 'package:resque/screens/messagingscreen.dart';
 
 import '../main.dart';
 
+// StatefulWidget for managing Bluetooth bonding processes.
 class BondScreen extends StatefulWidget {
   const BondScreen({super.key});
 
@@ -13,12 +14,14 @@ class BondScreen extends StatefulWidget {
 }
 
 class _BondScreenState extends State<BondScreen> {
-  final bondedDevices = ValueNotifier(<BluetoothDevice>[]);
+  final bondedDevices = ValueNotifier(<BluetoothDevice>[]); // Listens to changes in bonded devices list.
 
-  bool isListening = false;
+  bool isListening = false; // Tracks if the device is currently listening for connections.
+
   @override
   void initState() {
     super.initState();
+    // Requests necessary Bluetooth permissions on initialization.
     Future.wait([
       Permission.bluetooth.request(),
       Permission.bluetoothScan.request(),
@@ -31,24 +34,24 @@ class _BondScreenState extends State<BondScreen> {
     return StreamBuilder(
         stream: allBluetooth.streamBluetoothState,
         builder: (context, snapshot) {
-          final bluetoothOn = snapshot.data ?? false;
+          final bluetoothOn = snapshot.data ?? false; // Checks if Bluetooth is turned on.
           return Scaffold(
             appBar: AppBar(
               title: const Text("Bluetooth Connect"),
             ),
             floatingActionButton: switch (isListening) {
-              true => null,
+              true => null, // No floating action button if already listening.
               false => FloatingActionButton(
                   onPressed: switch (bluetoothOn) {
-                    false => null,
+                    false => null, // Disables button if Bluetooth is off.
                     true => () {
                         allBluetooth.startBluetoothServer();
-                        setState(() => isListening = true);
+                        setState(() => isListening = true); // Starts server and updates listening state.
                       },
                   },
                   backgroundColor:
                       bluetoothOn ? Theme.of(context).primaryColor : Colors.grey,
-                  child: const Icon(Icons.wifi_tethering),
+                  child: const Icon(Icons.wifi_tethering), // Icon for the floating action button.
                 ),
             },
             body: isListening
@@ -56,14 +59,14 @@ class _BondScreenState extends State<BondScreen> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text("Listening for connections"),
-                        const CircularProgressIndicator(),
+                        const Text("Listening for connections"), // Indicates listening status.
+                        const CircularProgressIndicator(), // Loading indicator.
                         FloatingActionButton(
-                          child: const Icon(Icons.stop),
+                          child: const Icon(Icons.stop), // Stop button.
                           onPressed: () {
-                            allBluetooth.closeConnection();
+                            allBluetooth.closeConnection(); // Stops Bluetooth connection.
                             setState(() {
-                              isListening = false;
+                              isListening = false; // Updates listening state.
                             });
                           },
                         )
@@ -83,24 +86,24 @@ class _BondScreenState extends State<BondScreen> {
                                 false => "off",
                               },
                               style: TextStyle(
-                                  color: bluetoothOn ? Colors.green : Colors.red),
+                                  color: bluetoothOn ? Colors.green : Colors.red), // Color indicating Bluetooth status.
                             ),
                             ElevatedButton(
                               onPressed: switch (bluetoothOn) {
-                                false => null,
+                                false => null, // Button disabled if Bluetooth is off.
                                 true => () async {
                                     final devices =
                                         await allBluetooth.getBondedDevices();
-                                    bondedDevices.value = devices;
+                                    bondedDevices.value = devices; // Updates the list of bonded devices.
                                   },
                               },
-                              child: const Text("Bonded Devices"),
+                              child: const Text("Bonded Devices"), // Button to fetch bonded devices.
                             ),
                           ],
                         ),
                         if (!bluetoothOn)
                           const Center(
-                            child: Text("Turn bluetooth on"),
+                            child: Text("Turn bluetooth on"), // Prompt to turn on Bluetooth.
                           ),
                         ValueListenableBuilder(
                             valueListenable: bondedDevices,
@@ -111,12 +114,12 @@ class _BondScreenState extends State<BondScreen> {
                                   itemBuilder: (context, index) {
                                     final device = devices[index];
                                     return ListTile(
-                                      title: Text(device.name),
-                                      subtitle: Text(device.address),
+                                      title: Text(device.name), // Display name of the device.
+                                      subtitle: Text(device.address), // Display address of the device.
                                       onTap: () {
-                                        allBluetooth.connectToDevice(device.address);
+                                        allBluetooth.connectToDevice(device.address); // Connects to the device.
                                         Navigator.of(context).push(MaterialPageRoute(
-                                          builder: (context) => MessageScreen(device: device),
+                                          builder: (context) => MessageScreen(device: device), // Navigates to the messaging screen.
                                         ));
                                       },
                                     );

@@ -143,7 +143,7 @@ import 'package:flutter_chat_bubble/clippers/chat_bubble_clipper_4.dart';
 //           itemBuilder: (context, index) {
 //             return ListTile(
 //               leading: CircleAvatar(
-//                 // backgroundImage: AssetImage('path_to_image'), // path to your image
+//                 // backgroundImage: AssetImage('path_to_image'), // path to the image
 //               ),
 //               title: Text('Contact Name: Message snippet'),
 //               subtitle: Text('10:00 AM'),
