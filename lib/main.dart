@@ -4,12 +4,15 @@ import 'package:flutter/material.dart';
 import 'alert_screen.dart';
 import 'home_screen.dart';
 import 'splash_page.dart';
+import 'package:all_bluetooth/all_bluetooth.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 
 void main() {
   runApp(const MyApp());
 }
+
+final allBluetooth = AllBluetooth();
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

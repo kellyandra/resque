@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -6,21 +8,17 @@ void main() {
 
 class AlertHistoryScreen extends StatefulWidget {
   @override
-  _AlertHistoryScreenState createState() => _AlertHistoryScreenState();
+  AlertHistoryScreenState createState() => AlertHistoryScreenState();
 }
 
-class _AlertHistoryScreenState extends State<AlertHistoryScreen> {
+class AlertHistoryScreenState extends State<AlertHistoryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.menu),
-          onPressed: () {},
-        ),
-        title: Text("ALERT HISTORY", style: TextStyle(fontWeight: FontWeight.bold)),
+        title: const Text("ALERT HISTORY", style: TextStyle(fontWeight: FontWeight.bold)),
         centerTitle: true,
       ),
       body: Container(
@@ -41,7 +39,7 @@ class _AlertHistoryScreenState extends State<AlertHistoryScreen> {
                 child: TextField(
                   decoration: InputDecoration(
                     hintText: "Search Alert",
-                    prefixIcon: Icon(Icons.search),
+                    prefixIcon: const Icon(Icons.search),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(30),
                       borderSide: BorderSide.none,
@@ -63,7 +61,7 @@ class _AlertHistoryScreenState extends State<AlertHistoryScreen> {
                     subtitle: Text("Detail of Alert ${index + 1}"),
                     trailing: TextButton(
                       onPressed: () {},
-                      child: Text("See details"),
+                      child: const Text("See details"),
                     ),
                   ),
                 ),

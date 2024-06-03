@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:resque/screens/bondeddevice.dart';
 import 'alert_screen.dart';
 import 'chat_screen.dart';
 import 'screens/devicesearchscreen.dart';
@@ -118,9 +119,9 @@ class _HomeScreenWidgetState extends State<HomeScreenWidget> {
       children: [
         _buildButton('Alert History', Icons.notifications, Colors.red, AlertHistoryScreen()),
         const SizedBox(height: 10),
-        _buildButton('Chat', Icons.chat, Colors.blue, ChatScreen()),
+        _buildButton('Chat', Icons.chat, Colors.blue, ChatsScreen()),
          const SizedBox(height: 10),
-         _buildButton('Connect Devices', Icons.bluetooth_searching, Colors.green, HomeScreen()),
+         _buildButton('Connect Devices', Icons.bluetooth_searching, Colors.green, BondScreen()),
       ],
     );
   }
